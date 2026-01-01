@@ -43,14 +43,25 @@
         radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
     }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 5%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+<nav>
+  <div class="logo">
+    <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
+  </div>
+  <div class="nav-links" id="nav-buttons">
+    <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+    <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+
+    <button onclick="loginWithDiscord()" id="login-btn">
+      <i class="fa-solid fa-right-to-bracket"></i> Sign In
+    </button>
+
+    <div id="user-info" style="display: none; align-items: center; gap: 0.6rem;">
+      <img id="nav-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 100px; border: 2px solid var(--accent); object-fit: cover;" />
+      <span id="nav-username" style="font-weight: 600;"></span>
+      <button onclick="logout()" style="background:none; border:none; color: var(--accent); font-weight:600; cursor:pointer;">Logout</button>
+    </div>
+  </div>
+</nav>
     .logo img {
       height: 60px;
       width: auto;
