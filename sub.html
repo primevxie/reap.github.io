@@ -5,93 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reap Client - Subscription Status</title>
   <meta name="theme-color" content="#DD2020"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
       --bg-color: #0a0a0a;
-      --accent: #dd2020;
-      --accent-soft: #2ecc71;
-      --text-main: #fff;
-      --text-muted: #888;
+      --card-bg: #111111;
+      --accent: #DD2020;
+      --accent-hover: #ff2a2a;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+      --success: #2ecc71;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     body {
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
-      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+    .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
       text-align: center;
-    }
-    .badge {
-      background-color: rgba(255,255,255,0.05);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 0.5rem 1.25rem;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .card {
-      background-color: #111;
-      padding: 2rem 3rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(221, 32, 32, 0.4);
-      max-width: 400px;
-      width: 100%;
+      padding: 8rem 1rem 4rem;
+      flex-grow: 1;
+      justify-content: center;
     }
     h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
     }
-    p {
-      font-size: 1rem;
+    .subtitle {
+      font-size: 1.1rem;
       color: var(--text-muted);
-      margin: 0.5rem 0;
+      margin-bottom: 2rem;
+    }
+    .status-box {
+      background: var(--card-bg);
+      border: 1px solid #222;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
     .success {
-      color: var(--accent-soft);
-      font-weight: 700;
+      color: var(--success);
     }
     .fail {
       color: var(--accent);
-      font-weight: 700;
+    }
+    footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #1a1a1a;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="badge">Subscription Status</div>
-    <h1 id="user-heading">Welcome</h1>
-    <p id="status-line">Checking your subscription…</p>
-    <p id="expiry-line"></p>
-  </div>
+  <div class="bg-mesh"></div>
+  <nav>
+    <div class="logo">
+      <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo" />
+    </div>
+    <div class="nav-links">
+      <a href="https://dcd.gg/reap" target="_blank">Discord</a>
+      <a href="https://github.com/primevxie" target="_blank">GitHub</a>
+    </div>
+  </nav>
+  <section class="hero">
+    <h1 id="user-heading">Loading...</h1>
+    <p class="subtitle" id="status-line">Checking whitelist status...</p>
+    <div class="status-box" id="box" style="display:none;">
+      <div class="tag" id="auth-line"></div>
+      <div id="expiry-line"></div>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2026 Reap Client. All rights reserved.</p>
+    <p style="font-size: 0.8rem; opacity: 0.5;">Not affiliated with Mojang or Microsoft.</p>
+  </footer>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const isAuth = params.get("authorized") === "true";
-    const user = params.get("user") || "User";
-    const expiry = params.get("expiry");
+    const user = params.get("user") || "Skid";
+    const expiry = params.get("expiry") || "???";
+    const error = params.get("error");
 
-    const heading = document.getElementById("user-heading");
+    document.getElementById("user-heading").textContent = `Welcome, ${user}`;
+    const box = document.getElementById("box");
     const statusLine = document.getElementById("status-line");
+    const authTag = document.getElementById("auth-line");
     const expiryLine = document.getElementById("expiry-line");
 
-    heading.textContent = `Welcome, ${user}`;
-
     if (params.has("authorized")) {
+      box.style.display = "block";
       if (isAuth) {
-        statusLine.innerHTML = `<span class="success">✅ You are WHITELISTED</span>`;
+        statusLine.textContent = "";
+        authTag.textContent = "✅ WHITELISTED";
+        authTag.classList.add("success");
         expiryLine.innerHTML = `<strong>Expires:</strong> ${expiry === "9999-12-31" ? "Lifetime" : expiry}`;
       } else {
-        statusLine.innerHTML = `<span class="fail">❌ Access Denied</span>`;
-        expiryLine.innerText = "You are not currently whitelisted or your subscription expired.";
+        statusLine.textContent = "Access Denied";
+        authTag.textContent = "❌ Not Whitelisted";
+        authTag.classList.add("fail");
+        expiryLine.textContent = error ? `Reason: ${error}` : "Please contact support or apply again.";
       }
     } else {
-      statusLine.innerText = "Invalid access. Start from the homepage.";
+      statusLine.textContent = "Invalid or missing verification parameters.";
     }
   </script>
 </body>
