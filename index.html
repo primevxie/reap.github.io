@@ -1,279 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reap Client | 1.8.9 Ghost Client</title>
-    <meta name="description" content="The ultimate optimized ghost client for Minecraft 1.8.9. Clean UI, high performance, and undetectable.">
-    <meta name="theme-color" content="#DD2020">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #111111;
-            --accent: #DD2020;
-            --accent-hover: #ff2a2a;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 60px;
-            width: auto;
-            transition: transform 0.3s ease;
-        }
-        .logo img:hover {
-            transform: scale(1.05);
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--text-main); }
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 1rem 4rem;
-        }
-        .badge {
-            background: rgba(221, 32, 32, 0.1);
-            color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(221, 32, 32, 0.2);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        p.subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 20px rgba(221, 32, 32, 0.4);
-        }
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-        .btn-secondary {
-            background: #1a1a1a;
-            color: white;
-            border: 1px solid #333;
-        }
-        .btn-secondary:hover {
-            background: #222;
-            border-color: #555;
-        }
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 1rem;
-        }
-        .stat-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid #222;
-            text-align: left;
-            transition: 0.3s;
-        }
-        .stat-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-        .stat-card i {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-        .stat-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .stat-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        footer {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #1a1a1a;
-            margin-top: 4rem;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .stats { grid-template-columns: 1fr; }
-            nav { padding: 1.5rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reap Client | 1.8.9 Ghost Client</title>
+  <meta name="description" content="The ultimate optimized ghost client for Minecraft 1.8.9. Clean UI, high performance, and undetectable." />
+  <meta name="theme-color" content="#DD2020" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --card-bg: #111111;
+      --accent: #DD2020;
+      --accent-hover: #ff2a2a;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-links a, .nav-links button {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: none;
+      font-family: inherit;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .nav-links a:hover, .nav-links button:hover {
+      color: var(--text-main);
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 1rem 4rem;
+    }
+    .badge {
+      background: rgba(221, 32, 32, 0.1);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(221, 32, 32, 0.2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 20px rgba(221, 32, 32, 0.4);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #1a1a1a;
+      color: white;
+      border: 1px solid #333;
+    }
+    .btn-secondary:hover {
+      background: #222;
+      border-color: #555;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 1rem;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #222;
+      text-align: left;
+      transition: 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+    .stat-card i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .stat-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .stat-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #1a1a1a;
+      margin-top: 4rem;
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .stats { grid-template-columns: 1fr; }
+      nav { padding: 1.5rem; flex-direction: column; gap: 1rem; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="bg-mesh"></div>
-    <nav>
-        <div class="logo">
-            <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
-        </div>
-        <div class="nav-links">
-            <a href="https://dcd.gg/reap" target="_blank">Discord</a>
-            <a href="https://github.com/primevxie" target="_blank">GitHub</a>
-        </div>
-    </nav>
-    <section class="hero">
-        <div class="badge">VERSION 1.2 NOW AVAILABLE</div>
-        <h1>DOMINATE<br>THE GAME.</h1>
-        <p class="subtitle">
-            The most advanced ghost client for Minecraft 1.8.9. 
-            Fully undetectable, optimized for performance, and designed for competitive play.
-        </p>
-        <div class="cta-buttons">
-            <a href="https://github.com/primevxie/reap.github.io/releases/download/latest/ReapLauncher.exe" class="btn btn-primary">
-                <i class="fa-solid fa-download"></i> Download Now
-            </a>
-            <a href="https://dcd.gg/reap" target="_blank" class="btn btn-secondary">
-                <i class="fa-brands fa-discord"></i> Join Discord 
-            </a>
-        </div>
-    </section>
-    <section class="hero" style="padding-top: 0;">
-        <div id="status-box" class="stat-card" style="width: 100%; max-width: 500px; text-align: center; margin: 0 auto;">
-            <i class="fa-brands fa-discord" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-            <h3 id="status-title">Subscription Portal</h3>
-            <p id="status-desc" style="margin-bottom: 1.5rem;">Log in with Discord to verify your whitelist status.</p>
-            <div id="status-content" style="display: flex; justify-content: center;">
-                <button onclick="loginWithDiscord()" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-right-to-bracket"></i> Check My Subscription
-                </button>
-            </div>
-        </div>
-    </section>
-    <section class="stats">
-        <div class="stat-card">
-            <i class="fa-solid fa-ghost"></i>
-            <h3>Fully Undetectable</h3>
-            <p>Advanced bypasses designed to keep your account safe on all major servers.</p>
-        </div>
-        <div class="stat-card">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>Zero Latency</h3>
-            <p>Optimized code ensures maximum FPS with zero impact on game performance.</p>
-        </div>
-        <div class="stat-card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Secure Launcher</h3>
-            <p>Custom built launcher with auto-updates and Discord whitelisting</p>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2026 Reap Client. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">
-            Not affiliated with Mojang or Microsoft.
-        </p>
-    </footer>
-    <script>
-        function loginWithDiscord() {
-            window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fauth%2Fcallback&response_type=code&scope=identify";
-        }
-        const params = new URLSearchParams(window.location.search);
-        const content = document.getElementById('status-content');
-        const title = document.getElementById('status-title');
-        const desc = document.getElementById('status-desc');
-        if (params.has('authorized')) {
-            const isAuth = params.get('authorized') === 'true';
-            const user = params.get('user') || 'User';
-            const expiry = params.get('expiry');
-            if (isAuth) {
-                title.innerText = `Welcome, ${user}`;
-                desc.innerHTML = `Status: <span style="color: #2ecc71; font-weight: bold;">Active ✅</span><br>Expires: ${expiry === '9999-12-31' ? 'Lifetime' : expiry}`;
-                content.innerHTML = `<div class="badge" style="margin-bottom:0;">WHITELISTED</div>`;
-            } else {
-                title.innerText = "Access Denied";
-                title.style.color = "var(--accent)";
-                desc.innerText = "You aren't whitelisted or your subscription has expired.";
-                content.innerHTML = `<a href="https://dcd.gg/reap" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fa-solid fa-cart-shopping"></i> Apply or Purchase</a>`;
-            }
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-    </script>
+  <div class="bg-mesh"></div>
+
+  <nav>
+    <div class="logo">
+      <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
+    </div>
+    <div class="nav-links">
+      <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+      <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+      <button onclick="loginWithDiscord()">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">VERSION 1.2 NOW AVAILABLE</div>
+    <h1>DOMINATE<br>THE GAME.</h1>
+    <p class="subtitle">
+      The most advanced ghost client for Minecraft 1.8.9. 
+      Fully undetectable, optimized for performance, and designed for competitive play.
+    </p>
+    <div class="cta-buttons">
+      <a href="https://github.com/primevxie/reap.github.io/releases/download/latest/ReapLauncher.exe" class="btn btn-primary">
+        <i class="fa-solid fa-download"></i> Download Now
+      </a>
+      <a href="https://dcd.gg/reap" target="_blank" class="btn btn-secondary">
+        <i class="fa-brands fa-discord"></i> Join Discord 
+      </a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <i class="fa-solid fa-ghost"></i>
+      <h3>Fully Undetectable</h3>
+      <p>Advanced bypasses designed to keep your account safe on all major servers.</p>
+    </div>
+    <div class="stat-card">
+      <i class="fa-solid fa-bolt"></i>
+      <h3>Zero Latency</h3>
+      <p>Optimized code ensures maximum FPS with zero impact on game performance.</p>
+    </div>
+    <div class="stat-card">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>Secure Launcher</h3>
+      <p>Custom built launcher with auto-updates and Discord whitelisting</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Reap Client. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">Not affiliated with Mojang or Microsoft.</p>
+  </footer>
+
+  <script>
+    function loginWithDiscord() {
+      window.location.href =
+        "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fcallback&response_type=code&scope=identify";
+    }
+  </script>
 </body>
 </html>
