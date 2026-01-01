@@ -184,7 +184,53 @@
         expiryLine.textContent = error ? `Reason: ${error}` : "Please contact support or apply again.";
       }
     } else {
-      statusLine.textContent = "Invalid or missing verification parameters.";
+      statusLine.textContent = "Invalid or missing verification parameters.";<script>
+  function loginWithDiscord() {
+    window.location.href =
+      "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fcallback&response_type=code&scope=identify";
+  }
+
+  function logout() {
+    localStorage.removeItem("reap_user");
+    localStorage.removeItem("reap_avatar");
+    localStorage.removeItem("reap_userid");
+    localStorage.removeItem("reap_auth");
+    localStorage.removeItem("reap_expiry");
+    location.href = "/";
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("authorized")) {
+    const authorized = params.get("authorized") === "true";
+    const user = params.get("user");
+    const avatar = params.get("avatar");
+    const userid = params.get("userid");
+    const expiry = params.get("expiry");
+
+    if (authorized && user && avatar && userid) {
+      localStorage.setItem("reap_user", user);
+      localStorage.setItem("reap_avatar", avatar);
+      localStorage.setItem("reap_userid", userid);
+      localStorage.setItem("reap_auth", "true");
+      localStorage.setItem("reap_expiry", expiry);
+      window.history.replaceState({}, document.title, window.location.pathname); // Clean up the URL
+    }
+  }
+
+  const username = localStorage.getItem("reap_user");
+  const avatar = localStorage.getItem("reap_avatar");
+  const userid = localStorage.getItem("reap_userid");
+  const authorized = localStorage.getItem("reap_auth") === "true";
+
+  if (authorized && username && avatar && userid) {
+    const avatarUrl = `https://cdn.discordapp.com/avatars/${userid}/${avatar}.png`;
+
+    document.getElementById("login-btn").style.display = "none";
+    document.getElementById("user-info").style.display = "flex";
+    document.getElementById("nav-username").textContent = username;
+    document.getElementById("nav-avatar").src = avatarUrl;
+  }
+</script>
     }
   </script>
 </body>
