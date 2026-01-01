@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reap Client - Subscription Status</title>
+  <title>Subscription Status | Reap Client</title>
   <meta name="theme-color" content="#DD2020"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
       --bg-color: #0a0a0a;
@@ -17,78 +17,68 @@
       --text-muted: #888888;
       --success: #2ecc71;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
-      overflow-x: hidden;
-      line-height: 1.6;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
-    .bg-mesh {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-<nav>
-  <div class="logo">
-    <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
-  </div>
-  <div class="nav-links" id="nav-buttons">
-    <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-    <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-
-    <button onclick="loginWithDiscord()" id="login-btn">
-      <i class="fa-solid fa-right-to-bracket"></i> Sign In
-    </button>
-
-    <div id="user-info" style="display: none; align-items: center; gap: 0.6rem;">
-      <img id="nav-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 100px; border: 2px solid var(--accent); object-fit: cover;" />
-      <span id="nav-username" style="font-weight: 600;"></span>
-      <button onclick="logout()" style="background:none; border:none; color: var(--accent); font-weight:600; cursor:pointer;">Logout</button>
-    </div>
-  </div>
-</nav>
     .logo img {
       height: 60px;
       width: auto;
       transition: transform 0.3s ease;
     }
-    .logo img:hover {
-      transform: scale(1.05);
+    .logo img:hover { transform: scale(1.05); }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
     }
-    .nav-links a {
+    .nav-links a, .nav-links button {
       color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 2rem;
       font-size: 0.9rem;
       font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: none;
+      font-family: inherit;
       transition: 0.3s;
+      cursor: pointer;
     }
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-links button:hover {
       color: var(--text-main);
+    }
+    #user-info {
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    #nav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 100px;
+      border: 2px solid var(--accent);
+      object-fit: cover;
     }
     .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 8rem 1rem 4rem;
-      flex-grow: 1;
-      justify-content: center;
+      padding: 6rem 1rem 3rem;
+      flex: 1;
     }
     h1 {
       font-size: 3rem;
@@ -98,139 +88,134 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
     .status-box {
       background: var(--card-bg);
-      border: 1px solid #222;
       padding: 2rem;
+      border: 1px solid #222;
       border-radius: 12px;
-      max-width: 500px;
-      margin-top: 1.5rem;
+      max-width: 420px;
+      width: 100%;
+      margin-top: 2rem;
+      text-align: center;
     }
-    .tag {
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      display: inline-block;
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
       margin-bottom: 1rem;
     }
-    .success {
-      color: var(--success);
+    .tag {
+      margin: 1rem 0;
+      font-weight: bold;
+      padding: 0.5rem 1.25rem;
+      border-radius: 999px;
+      display: inline-block;
     }
-    .fail {
-      color: var(--accent);
-    }
+    .success { color: var(--success); }
+    .fail { color: var(--accent); }
     footer {
-      text-align: center;
       padding: 4rem 0;
+      text-align: center;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      font-size: 0.9rem;
       border-top: 1px solid #1a1a1a;
     }
   </style>
 </head>
 <body>
-  <div class="bg-mesh"></div>
   <nav>
     <div class="logo">
-      <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo" />
+      <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
     </div>
     <div class="nav-links">
-      <a href="https://dcd.gg/reap" target="_blank">Discord</a>
-      <a href="https://github.com/primevxie" target="_blank">GitHub</a>
+      <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+      <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+
+      <button onclick="loginWithDiscord()" id="login-btn">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+      </button>
+
+      <div id="user-info">
+        <img id="nav-avatar" src="" alt="Avatar" />
+        <span id="nav-username"></span>
+        <button onclick="logout()" style="background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer;">Logout</button>
+      </div>
     </div>
   </nav>
+
   <section class="hero">
     <h1 id="user-heading">Loading...</h1>
-    <p class="subtitle" id="status-line">Checking whitelist status...</p>
-    <div class="status-box" id="box" style="display:none;">
-      <div class="tag" id="auth-line"></div>
-      <div id="expiry-line"></div>
+    <div class="status-box" id="status-box" style="display: none;">
+      <img id="status-avatar" class="avatar" src="" alt="avatar" />
+      <h2 id="status-username"></h2>
+      <div id="status-tag" class="tag"></div>
+      <p id="status-expiry"></p>
     </div>
   </section>
+
   <footer>
     <p>&copy; 2026 Reap Client. All rights reserved.</p>
     <p style="font-size: 0.8rem; opacity: 0.5;">Not affiliated with Mojang or Microsoft.</p>
   </footer>
 
   <script>
+    function loginWithDiscord() {
+      window.location.href =
+        "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fcallback&response_type=code&scope=identify";
+    }
+
+    function logout() {
+      localStorage.clear();
+      location.href = "/";
+    }
+
     const params = new URLSearchParams(window.location.search);
-    const isAuth = params.get("authorized") === "true";
-    const user = params.get("user") || "Skid";
-    const expiry = params.get("expiry") || "???";
-    const error = params.get("error");
-
-    document.getElementById("user-heading").textContent = `Welcome, ${user}`;
-    const box = document.getElementById("box");
-    const statusLine = document.getElementById("status-line");
-    const authTag = document.getElementById("auth-line");
-    const expiryLine = document.getElementById("expiry-line");
-
-    if (params.has("authorized")) {
-      box.style.display = "block";
-      if (isAuth) {
-        statusLine.textContent = "";
-        authTag.textContent = "✅ WHITELISTED";
-        authTag.classList.add("success");
-        expiryLine.innerHTML = `<strong>Expires:</strong> ${expiry === "9999-12-31" ? "Lifetime" : expiry}`;
-      } else {
-        statusLine.textContent = "Access Denied";
-        authTag.textContent = "❌ Not Whitelisted";
-        authTag.classList.add("fail");
-        expiryLine.textContent = error ? `Reason: ${error}` : "Please contact support or apply again.";
-      }
-    } else {
-      statusLine.textContent = "Invalid or missing verification parameters.";<script>
-  function loginWithDiscord() {
-    window.location.href =
-      "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fcallback&response_type=code&scope=identify";
-  }
-
-  function logout() {
-    localStorage.removeItem("reap_user");
-    localStorage.removeItem("reap_avatar");
-    localStorage.removeItem("reap_userid");
-    localStorage.removeItem("reap_auth");
-    localStorage.removeItem("reap_expiry");
-    location.href = "/";
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  if (params.has("authorized")) {
-    const authorized = params.get("authorized") === "true";
+    const auth = params.get("authorized") === "true";
     const user = params.get("user");
     const avatar = params.get("avatar");
     const userid = params.get("userid");
     const expiry = params.get("expiry");
 
-    if (authorized && user && avatar && userid) {
+    if (auth && user && avatar && userid) {
       localStorage.setItem("reap_user", user);
       localStorage.setItem("reap_avatar", avatar);
       localStorage.setItem("reap_userid", userid);
       localStorage.setItem("reap_auth", "true");
       localStorage.setItem("reap_expiry", expiry);
-      window.history.replaceState({}, document.title, window.location.pathname); // Clean up the URL
+      history.replaceState({}, document.title, window.location.pathname);
     }
-  }
 
-  const username = localStorage.getItem("reap_user");
-  const avatar = localStorage.getItem("reap_avatar");
-  const userid = localStorage.getItem("reap_userid");
-  const authorized = localStorage.getItem("reap_auth") === "true";
+    const storedUser = localStorage.getItem("reap_user");
+    const storedAvatar = localStorage.getItem("reap_avatar");
+    const storedUserid = localStorage.getItem("reap_userid");
+    const storedAuth = localStorage.getItem("reap_auth");
+    const storedExpiry = localStorage.getItem("reap_expiry");
 
-  if (authorized && username && avatar && userid) {
-    const avatarUrl = `https://cdn.discordapp.com/avatars/${userid}/${avatar}.png`;
+    if (storedUser && storedAvatar && storedUserid && storedAuth === "true") {
+      const avatarUrl = `https://cdn.discordapp.com/avatars/${storedUserid}/${storedAvatar}.png`;
 
-    document.getElementById("login-btn").style.display = "none";
-    document.getElementById("user-info").style.display = "flex";
-    document.getElementById("nav-username").textContent = username;
-    document.getElementById("nav-avatar").src = avatarUrl;
-  }
-</script>
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("user-info").style.display = "flex";
+      document.getElementById("nav-username").textContent = storedUser;
+      document.getElementById("nav-avatar").src = avatarUrl;
+
+      document.getElementById("user-heading").textContent = `${storedUser}'s Subscription`;
+
+      document.getElementById("status-box").style.display = "block";
+      document.getElementById("status-avatar").src = avatarUrl;
+      document.getElementById("status-username").textContent = storedUser;
+      document.getElementById("status-tag").textContent = "✅ WHITELISTED";
+      document.getElementById("status-tag").classList.add("success");
+      document.getElementById("status-expiry").textContent =
+        storedExpiry === "9999-12-31" ? "Lifetime Sub" : `Expires: ${storedExpiry}`;
+    } else {
+      document.getElementById("user-heading").textContent = "Access Denied";
+      document.getElementById("status-box").style.display = "block";
+      document.getElementById("status-tag").textContent = "❌ NOT WHITELISTED";
+      document.getElementById("status-tag").classList.add("fail");
+      document.getElementById("status-expiry").textContent =
+        "You are not whitelisted or your subscription has expired.";
     }
   </script>
 </body>
