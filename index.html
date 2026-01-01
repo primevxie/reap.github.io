@@ -197,18 +197,23 @@
 <body>
   <div class="bg-mesh"></div>
 
-  <nav>
-    <div class="logo">
-      <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
+<nav>
+  <div class="logo">
+    <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap">
+  </div>
+  <div class="nav-links" id="nav-buttons">
+    <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+    <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+    <button onclick="loginWithDiscord()" id="login-btn">
+      <i class="fa-solid fa-right-to-bracket"></i> Sign In
+    </button>
+    <div id="user-info" style="display: none; align-items: center; gap: 0.6rem;">
+      <img id="nav-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 100px; border: 2px solid var(--accent); object-fit: cover;" />
+      <span id="nav-username" style="font-weight: 600;"></span>
+      <button onclick="logout()" style="background:none; border:none; color: var(--accent); font-weight:600; cursor:pointer;">Logout</button>
     </div>
-    <div class="nav-links">
-      <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-      <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-      <button onclick="loginWithDiscord()">
-        <i class="fa-solid fa-right-to-bracket"></i> Sign In
-      </button>
-    </div>
-  </nav>
+  </div>
+</nav>
 
   <section class="hero">
     <div class="badge">VERSION 1.2 NOW AVAILABLE</div>
