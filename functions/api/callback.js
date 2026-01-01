@@ -1,4 +1,4 @@
-export async function onRequestGet(context) {
+export async function onRequest(context) {  
   const { searchParams } = new URL(context.request.url);
   const code = searchParams.get('code');
 
