@@ -284,6 +284,34 @@
         </div>
     </section>
 
+<div id="status-box">
+    <button onclick="loginWithDiscord()">Check My Subscription</button>
+</div>
+
+<script>
+function loginWithDiscord() {
+    window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fauth%2Fcallback&response_type=code&scope=identify";
+}
+
+const params = new URLSearchParams(window.location.search);
+const statusBox = document.getElementById('status-box');
+
+if (params.has('authorized')) {
+    if (params.get('authorized') === 'true') {
+        statusBox.innerHTML = `
+            <h2>Welcome, ${params.get('user')}!</h2>
+            <p style="color: green;">Status: Active ✅</p>
+            <p>Expires: ${params.get('expiry') === '9999-12-31' ? 'Lifetime' : params.get('expiry')}</p>
+        `;
+    } else {
+        statusBox.innerHTML = `
+            <h2 style="color: red;">You aren't whitelisted</h2>
+            <a href="https://discord.gg/reap" class="btn">Apply or Purchase Subscription</a>
+        `;
+    }
+}
+</script>
+    
     <footer>
         <p>&copy; 2026 Reap Client. All rights reserved.</p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">
