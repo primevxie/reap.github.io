@@ -6,13 +6,10 @@
     <title>Reap Client | 1.8.9 Ghost Client</title>
     <meta name="description" content="The ultimate optimized ghost client for Minecraft 1.8.9. Clean UI, high performance, and undetectable.">
     <meta name="theme-color" content="#DD2020">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --bg-color: #0a0a0a;
@@ -22,13 +19,11 @@
             --text-main: #ffffff;
             --text-muted: #888888;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -36,8 +31,6 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
-
-        /* --- BACKGROUND MESH --- */
         .bg-mesh {
             position: fixed;
             top: 0;
@@ -49,43 +42,26 @@
                 radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
         }
-
-        /* --- NAVBAR --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%; /* Reduced padding slightly for image balance */
+            padding: 1.5rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        /* UPDATED LOGO STYLES FOR IMAGE */
         .logo {
             display: flex;
             align-items: center;
         }
-
         .logo img {
-            height: 512; /* Sets height, width scales automatically */
-            width: 512;
+            height: 60px;
+            width: auto;
             transition: transform 0.3s ease;
         }
-
         .logo img:hover {
             transform: scale(1.05);
         }
-
-        /* 
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-        }
-        .logo span { color: var(--accent); }
-        */
-
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
@@ -94,10 +70,7 @@
             font-weight: 600;
             transition: 0.3s;
         }
-
         .nav-links a:hover { color: var(--text-main); }
-
-        /* --- HERO SECTION --- */
         .hero {
             display: flex;
             flex-direction: column;
@@ -105,7 +78,6 @@
             text-align: center;
             padding: 8rem 1rem 4rem;
         }
-
         .badge {
             background: rgba(221, 32, 32, 0.1);
             color: var(--accent);
@@ -117,7 +89,6 @@
             border: 1px solid rgba(221, 32, 32, 0.2);
             font-family: 'JetBrains Mono', monospace;
         }
-
         h1 {
             font-size: 4rem;
             font-weight: 800;
@@ -127,19 +98,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         p.subtitle {
             font-size: 1.2rem;
             color: var(--text-muted);
             max-width: 600px;
             margin-bottom: 3rem;
         }
-
         .cta-buttons {
             display: flex;
             gap: 1rem;
         }
-
         .btn {
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -149,31 +117,28 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
-
         .btn-primary {
             background: var(--accent);
             color: white;
             box-shadow: 0 4px 20px rgba(221, 32, 32, 0.4);
         }
-
         .btn-primary:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
         }
-
         .btn-secondary {
             background: #1a1a1a;
             color: white;
             border: 1px solid #333;
         }
-
         .btn-secondary:hover {
             background: #222;
             border-color: #555;
         }
-
-        /* --- STATS / FEATURES --- */
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -182,7 +147,6 @@
             margin: 4rem auto;
             padding: 0 1rem;
         }
-
         .stat-card {
             background: var(--card-bg);
             padding: 2rem;
@@ -191,29 +155,23 @@
             text-align: left;
             transition: 0.3s;
         }
-
         .stat-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
         }
-
         .stat-card i {
             font-size: 1.5rem;
             color: var(--accent);
             margin-bottom: 1rem;
         }
-
         .stat-card h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
-
         .stat-card p {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
-
-        /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 4rem 0;
@@ -222,31 +180,25 @@
             border-top: 1px solid #1a1a1a;
             margin-top: 4rem;
         }
-
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .stats { grid-template-columns: 1fr; }
             nav { padding: 1.5rem; }
-            .nav-links { display: none; } /* Simplified for mobile */
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-
     <div class="bg-mesh"></div>
-
     <nav>
         <div class="logo">
             <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
         </div>
-        
         <div class="nav-links">
             <a href="https://dcd.gg/reap" target="_blank">Discord</a>
             <a href="https://github.com/primevxie" target="_blank">GitHub</a>
         </div>
     </nav>
-
     <section class="hero">
         <div class="badge">VERSION 1.2 NOW AVAILABLE</div>
         <h1>DOMINATE<br>THE GAME.</h1>
@@ -254,18 +206,27 @@
             The most advanced ghost client for Minecraft 1.8.9. 
             Fully undetectable, optimized for performance, and designed for competitive play.
         </p>
-        
         <div class="cta-buttons">
             <a href="https://github.com/primevxie/reap.github.io/releases/download/latest/ReapLauncher.exe" class="btn btn-primary">
                 <i class="fa-solid fa-download"></i> Download Now
             </a>
-            
             <a href="https://dcd.gg/reap" target="_blank" class="btn btn-secondary">
                 <i class="fa-brands fa-discord"></i> Join Discord 
             </a>
         </div>
     </section>
-
+    <section class="hero" style="padding-top: 0;">
+        <div id="status-box" class="stat-card" style="width: 100%; max-width: 500px; text-align: center; margin: 0 auto;">
+            <i class="fa-brands fa-discord" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+            <h3 id="status-title">Subscription Portal</h3>
+            <p id="status-desc" style="margin-bottom: 1.5rem;">Log in with Discord to verify your whitelist status.</p>
+            <div id="status-content" style="display: flex; justify-content: center;">
+                <button onclick="loginWithDiscord()" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Check My Subscription
+                </button>
+            </div>
+        </div>
+    </section>
     <section class="stats">
         <div class="stat-card">
             <i class="fa-solid fa-ghost"></i>
@@ -283,41 +244,36 @@
             <p>Custom built launcher with auto-updates and Discord whitelisting</p>
         </div>
     </section>
-
-<div id="status-box">
-    <button onclick="loginWithDiscord()">Check My Subscription</button>
-</div>
-
-<script>
-function loginWithDiscord() {
-    window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fauth%2Fcallback&response_type=code&scope=identify";
-}
-
-const params = new URLSearchParams(window.location.search);
-const statusBox = document.getElementById('status-box');
-
-if (params.has('authorized')) {
-    if (params.get('authorized') === 'true') {
-        statusBox.innerHTML = `
-            <h2>Welcome, ${params.get('user')}!</h2>
-            <p style="color: green;">Status: Active ✅</p>
-            <p>Expires: ${params.get('expiry') === '9999-12-31' ? 'Lifetime' : params.get('expiry')}</p>
-        `;
-    } else {
-        statusBox.innerHTML = `
-            <h2 style="color: red;">You aren't whitelisted</h2>
-            <a href="https://discord.gg/reap" class="btn">Apply or Purchase Subscription</a>
-        `;
-    }
-}
-</script>
-    
     <footer>
         <p>&copy; 2026 Reap Client. All rights reserved.</p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">
             Not affiliated with Mojang or Microsoft.
         </p>
     </footer>
-
+    <script>
+        function loginWithDiscord() {
+            window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1456236263471452213&redirect_uri=https%3A%2F%2Fskids.smelly.cc%2Fapi%2Fauth%2Fcallback&response_type=code&scope=identify";
+        }
+        const params = new URLSearchParams(window.location.search);
+        const content = document.getElementById('status-content');
+        const title = document.getElementById('status-title');
+        const desc = document.getElementById('status-desc');
+        if (params.has('authorized')) {
+            const isAuth = params.get('authorized') === 'true';
+            const user = params.get('user') || 'User';
+            const expiry = params.get('expiry');
+            if (isAuth) {
+                title.innerText = `Welcome, ${user}`;
+                desc.innerHTML = `Status: <span style="color: #2ecc71; font-weight: bold;">Active ✅</span><br>Expires: ${expiry === '9999-12-31' ? 'Lifetime' : expiry}`;
+                content.innerHTML = `<div class="badge" style="margin-bottom:0;">WHITELISTED</div>`;
+            } else {
+                title.innerText = "Access Denied";
+                title.style.color = "var(--accent)";
+                desc.innerText = "You aren't whitelisted or your subscription has expired.";
+                content.innerHTML = `<a href="https://dcd.gg/reap" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fa-solid fa-cart-shopping"></i> Apply or Purchase</a>`;
+            }
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 </body>
 </html>
