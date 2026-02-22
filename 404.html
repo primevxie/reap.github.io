@@ -1,198 +1,194 @@
-htmlDownloadCopy code<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Reap Client</title>
-    <meta name="description" content="The page you requested could not be found.">
-    <meta name="theme-color" content="#DD2020">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /*
-         * GLOBAL STYLES & VARIABLES - Copied from index.html
-         */
-        :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #111111;
-            --accent: #DD2020;
-            --accent-hover: #ff2a2a;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-            display: flex; /* Added for sticky footer in 404 */
-            flex-direction: column; /* Added for sticky footer in 404 */
-            min-height: 100vh; /* Added for sticky footer in 404 */
-        }
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(221, 32, 32, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(221, 32, 32, 0.05), transparent 25%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>r e a p !</title>
+  <style>
+    body {
+      background-color: #050505;
+      color: #cccccc;
+      font-family: Consolas, monospace;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    
+    h1 {
+      color: #dd2020;
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+      font-size: 2.5em;
+    }
 
-<nav>
-  <div class="logo">
-    <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
-  </div>
-  <div class="nav-links" id="nav-buttons">
-    <a href="https://dcd.gg/reap" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-    <a href="https://github.com/primevxie" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+    .subtitle {
+      color: #888;
+      margin-bottom: 40px;
+    }
+    
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
+    }
+    
+    details.dev-notice {
+      border: 1px dashed #dd2020;
+      background-color: #0a0a0a;
+      padding: 20px;
+      line-height: 1.6;
+      transition: background-color 0.2s;
+    }
+    
+    details.dev-notice:hover {
+      background-color: #0f0f0f;
+    }
+    
+    details.dev-notice summary {
+      color: #dd2020;
+      font-weight: bold;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      outline: none;
+    }
+    
+    details.dev-notice summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    details.dev-notice summary::before {
+      content: "> ";
+      color: #dd2020;
+    }
+    
+    details[open].dev-notice summary::before {
+      content: "v ";
+    }
+    
+    details.dev-notice p {
+      margin-top: 15px;
+      margin-bottom: 0;
+      color: #cccccc;
+      border-top: 1px dotted #333;
+      padding-top: 15px;
+    }
 
-    <button onclick="loginWithDiscord()" id="login-btn">
-      <i class="fa-solid fa-right-to-bracket"></i> Sign In
-    </button>
+    .discord-footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
 
-    <div id="user-info" style="display: none; align-items: center; gap: 0.6rem;">
-      <img id="nav-avatar" src="" alt="Avatar" style="width: 32px; height: 32px; border-radius: 100px; border: 2px solid var(--accent); object-fit: cover;" />
-      <span id="nav-username" style="font-weight: 600;"></span>
-      <button onclick="logout()" style="background:none; border:none; color: var(--accent); font-weight:600; cursor:pointer;">Logout</button>
-    </div>
-  </div>
-</nav>
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 60px;
-            width: auto;
-            transition: transform 0.3s ease;
-        }
-        .logo img:hover {
-            transform: scale(1.05);
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--text-main); }
+    .discord-footer a {
+      color: #888;
+      text-decoration: none;
+      border-bottom: 1px dashed #888;
+      transition: all 0.2s;
+    }
 
-        /*
-         * HERO/MAIN CONTENT STYLES - Adapted from index.html
-         */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 1rem 4rem;
-            flex-grow: 1; /* Added for sticky footer in 404 */
-            justify-content: center; /* Center content vertically in 404 */
-        }
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        p.subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 20px rgba(221, 32, 32, 0.4);
-        }
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-        /*
-         * FOOTER STYLES - Copied from index.html
-         */
-        footer {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #1a1a1a;
-            margin-top: 4rem; /* Adjusted for better spacing in 404 */
-        }
-
-        /*
-         * MEDIA QUERIES - Copied from index.html
-         */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            nav { padding: 1.5rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+    .discord-footer a:hover {
+      color: #dd2020;
+      border-bottom-color: #dd2020;
+    }
+  </style>
 </head>
 <body>
-    <div class="bg-mesh"></div>
-    <nav>
-        <div class="logo">
-            <img src="https://github.com/primevxie/primevxie.github.io/blob/main/reaplogodc2.png?raw=true" alt="Reap Client Logo">
-        </div>
-        <div class="nav-links">
-            <a href="https://dcd.gg/reap" target="_blank">Discord</a>
-            <a href="https://github.com/primevxie" target="_blank">GitHub</a>
-        </div>
-    </nav>
-    <section class="hero">
-        <h1>404</h1>
-        <p class="subtitle">
-            Oops! The page you were looking for doesn't exist or has been moved.
-            Please check the URL or return to the homepage.
+
+  <main>
+    <h1>reap</h1>
+    <div class="subtitle">Reap is currently under maintenance. Also this was a 404 page before lol</div>
+    
+    <div class="faq-container">
+      
+      <details class="dev-notice">
+        <summary>What happened?</summary>
+        <p>
+          Basically, X was the dev of the injector and part of the cheat (recent esp, AI & backtrack updates) and he cannot help anymore because of personal reasons. I cannot do anything without him. I cannot update the cheat well without him, I cannot fix the hosting issue (he hosts the backend) without him, so the client won't EVEN WORK. I cannot do anything. Thanks y'all for being here though, will probably move on to something else.
         </p>
-        <div class="cta-buttons">
-            <a href="/" class="btn btn-primary">
-                <i class="fa-solid fa-house"></i> Go Home
-            </a>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2026 Reap Client. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">
-            Not affiliated with Mojang or Microsoft.
+      </details>
+
+      <details class="dev-notice">
+        <summary>Is Reap ever coming back?</summary>
+        <p>
+          We don't know yet. Reap will probably transform into something else entirely.
         </p>
-    </footer>
+      </details>
+
+      <details class="dev-notice">
+        <summary>When will Reap come back if it will?</summary>
+        <p>
+          Probably this year, we don't know the exact date. Maybe this month even?
+        </p>
+      </details>
+
+    </div>
+
+    <div class="discord-footer">
+      <a href="https://skids.smelly.cc/discord" target="_blank">> Join the Discord</a>
+    </div>
+  </main>
+
+  <script>
+    const titleText = "r e a p !";
+    let index = 0;
+    let isDeleting = false;
+    let isPaused = false;
+    let cursorVisible = true;
+
+    // The agonizingly slow cursor blink while paused
+    setInterval(() => {
+      if (isPaused) {
+        cursorVisible = !cursorVisible;
+        document.title = titleText.substring(0, index) + (cursorVisible ? "|" : " ");
+      }
+    }, 600); // 600ms blink rate
+
+    function animateTabTitle() {
+      // Force cursor visible while actively typing/deleting
+      if (!isPaused) {
+        document.title = titleText.substring(0, index) + "|";
+      }
+
+      if (!isDeleting && index < titleText.length) {
+        index++;
+        setTimeout(animateTabTitle, 200);
+      } 
+      else if (isDeleting && index > 0) {
+        index--;
+        setTimeout(animateTabTitle, 150);
+      } 
+      else if (index === titleText.length && !isDeleting) {
+        isPaused = true;
+        isDeleting = true; 
+        setTimeout(() => {
+          isPaused = false;
+          animateTabTitle();
+        }, 3500); // Sit at the completed text and blink
+      } 
+      else if (index === 0 && isDeleting) {
+        isPaused = true;
+        isDeleting = false; 
+        setTimeout(() => {
+          isPaused = false;
+          animateTabTitle();
+        }, 2000); // Sit at the empty void and blink
+      }
+    }
+
+    setTimeout(animateTabTitle, 500);
+  </script>
 </body>
 </html>
